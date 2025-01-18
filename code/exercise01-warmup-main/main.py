@@ -10,3 +10,4 @@ from vacuum import Vacuum
 # Example
 vacuum = Vacuum()
 print(vacuum)
+
