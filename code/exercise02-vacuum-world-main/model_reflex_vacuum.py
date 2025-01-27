@@ -22,17 +22,17 @@ class ModelReflexVacuum:
 
     def suck(self):
         self.transition_model.apply_suction()
-        return None
+        # return None
     
     def move_left(self):
         # the README states that move_left should deligate to transition model and call movel_left, however that does not exist in the transition_model.py
         self.transition_model.move_left()
-        return None
+        # return None
 
     def move_right(self):
         # the README states that move_right should deligate to transition model and call movel_right, however that does not exist in the transition_model.py
         self.transition_model.move_right()
-        return None
+        # return None
     
     """
     Update state

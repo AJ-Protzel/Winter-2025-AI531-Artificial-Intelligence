@@ -4,8 +4,8 @@
 
 class SimpleReflexVacuum:
 
-    def __init__(self):
-        pass
+    # def __init__(self):
+    #     pass
 
     """
     Actuators
@@ -13,15 +13,15 @@ class SimpleReflexVacuum:
 
     def suck(self):
         print("Sucked")
-        pass
+        # pass
 
     def move_left(self):
         print("Moved Left")
-        pass
+        # pass
 
     def move_right(self):
         print("Moved Right")
-        pass
+        # pass
     
     """
     Agent function
