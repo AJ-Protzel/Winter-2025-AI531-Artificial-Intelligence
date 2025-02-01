@@ -1,7 +1,7 @@
 # EightPuzzleAgent: A goal-based agent that emits the actions from a solution to
 # an "eight puzzle" problem.
 # Your implementation should pass the tests in test_eight_puzzle_agent.py.
-# YOUR NAME
+# Adrien Protzel
 
 
 class EightPuzzleAgent:
@@ -13,11 +13,13 @@ class EightPuzzleAgent:
 
     def has_actions(self):
         """ Return `True` when `self.actions` is not empty """
-        pass
+        return self.actions
 
     def action(self):
         """ Return the next action in `self.actions` """
-        pass
+        if(self.has_actions()):
+            action = self.actions.pop(0)
+            return action
 
     def move_left(self):
         """
@@ -25,7 +27,8 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        pass
+        print("Left")
+        self.current_state = self.transition_model.move_left(self.current_state)
 
     def move_right(self):
         """
@@ -33,7 +36,8 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        pass
+        print("Right")
+        self.current_state = self.transition_model.move_right(self.current_state)
 
     def move_up(self):
         """
@@ -41,7 +45,8 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        pass
+        print("Up")
+        self.current_state = self.transition_model.move_up(self.current_state)
 
     def move_down(self):
         """
@@ -49,4 +54,5 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        pass
+        print("Down")
+        self.current_state = self.transition_model.move_down(self.current_state)
