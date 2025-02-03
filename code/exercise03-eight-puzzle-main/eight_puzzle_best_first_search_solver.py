@@ -10,6 +10,9 @@ from eight_puzzle_node import EightPuzzleNode
 
 class EightPuzzleBestFirstSearchSolver:
 
+    def __init__(self, goal_state):
+        self.goal_state = goal_state
+
     def solution(self, problem):
         """
         Return a list of EightPuzzleAgent actuator methods. If the problem
@@ -61,9 +64,13 @@ class EightPuzzleBestFirstSearchSolver:
     
     def heuristic(self, state):
         """
-        Heuristic function to estimate the cost from the current state to the goal state.
+        Admissible
         """
-        return 0
+        distance = 0
+        for i in range(9):
+            if state[i] is not None and state[i] != self.goal_state[i]:
+                distance += 1
+        return distance
 
     def actions_to_reach_solution_node(self, solution_node):
         """
@@ -77,3 +84,4 @@ class EightPuzzleBestFirstSearchSolver:
             node = node.parent
         actions.reverse() 
         return actions
+    
