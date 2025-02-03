@@ -27,7 +27,7 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        # print("Left")
+        print("Left")
         self.current_state = self.transition_model.move_left(self.current_state)
 
     def move_right(self):
@@ -36,7 +36,7 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        # print("Right")
+        print("Right")
         self.current_state = self.transition_model.move_right(self.current_state)
 
     def move_up(self):
@@ -45,7 +45,7 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        # print("Up")
+        print("Up")
         self.current_state = self.transition_model.move_up(self.current_state)
 
     def move_down(self):
@@ -54,5 +54,5 @@ class EightPuzzleAgent:
         EightPuzzleTransitionModel stored in `self.transition_model` to obtain
         the new state to assign to `self.current_state`.
         """
-        # print("Down")
+        print("Down")
         self.current_state = self.transition_model.move_down(self.current_state)
