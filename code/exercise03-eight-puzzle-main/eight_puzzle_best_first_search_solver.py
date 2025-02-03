@@ -9,8 +9,6 @@ from queue import PriorityQueue
 from eight_puzzle_node import EightPuzzleNode
 
 class EightPuzzleBestFirstSearchSolver:
-    def __init__(self, heuristic=None):
-        self.heuristic = heuristic if heuristic else self.default_heuristic
 
     def solution(self, problem):
         """
@@ -61,7 +59,7 @@ class EightPuzzleBestFirstSearchSolver:
         h = self.heuristic(node.state)
         return g + h
     
-    def default_heuristic(self, state):
+    def heuristic(self, state):
         """
         Heuristic function to estimate the cost from the current state to the goal state.
         """
