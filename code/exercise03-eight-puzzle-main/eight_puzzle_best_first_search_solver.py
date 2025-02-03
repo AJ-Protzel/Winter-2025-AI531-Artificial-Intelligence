@@ -5,7 +5,6 @@
 # solution, which is a list of actions.
 # Adrien Protzel
 
-
 from queue import PriorityQueue
 from eight_puzzle_node import EightPuzzleNode
 
@@ -80,4 +79,3 @@ class EightPuzzleBestFirstSearchSolver:
             node = node.parent
         actions.reverse() 
         return actions
-    

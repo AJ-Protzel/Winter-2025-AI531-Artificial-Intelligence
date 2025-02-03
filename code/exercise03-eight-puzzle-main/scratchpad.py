@@ -9,14 +9,7 @@ from eight_puzzle_transition_model import EightPuzzleTransitionModel
 from eight_puzzle_problem import EightPuzzleProblem
 from eight_puzzle_best_first_search_solver import EightPuzzleBestFirstSearchSolver
 from heuristics import (
-    heuristic_default,
-    heuristic_manhattan,
-    heuristic_euclidean,
-    heuristic_chebyshev,
-    heuristic_octile,
-    heuristic_hamming,
-    heuristic_misplaced_tiles,
-    heuristic_linear_conflict
+    heuristic_default
 )
 
 def generate_states(x):
