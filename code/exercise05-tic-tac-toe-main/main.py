@@ -10,8 +10,8 @@ from random_tic_tac_toe_agent import RandomTicTacToeAgent
 
 renderer = TicTacToeBoardRenderer()
 game = TicTacToeGame((None, None, None, None, None, None, None, None, None), renderer)
-human_agent = HumanTicTacToeAgent(game, TicTacToeGame.P1_SYMBOL)
-# human_agent = RandomTicTacToeAgent(game, TicTacToeGame.P1_SYMBOL)
+# human_agent = HumanTicTacToeAgent(game, TicTacToeGame.P1_SYMBOL)
+human_agent = RandomTicTacToeAgent(game, TicTacToeGame.P1_SYMBOL)
 ai_agent = MinimaxTicTacToeAgent(game, TicTacToeGame.P2_SYMBOL)
 
 print(f"Let's play tic-tac-toe! You are {human_agent.symbol} and I am {ai_agent.symbol}.\n")
@@ -22,12 +22,16 @@ while game.is_not_over():
     game.state = game.result(game.state, human_agent.action(game.state))
     print(game)
     if game.is_win(game.state, human_agent.symbol):
-        print('You win!')
+        print('Player 1 Wins!')
         break
-    game.state = game.result(game.state, ai_agent.action(game.state))
+    ai_move = ai_agent.action(game.state)
+    if ai_move is None:
+        print("Cats Game!")
+        break
+    game.state = game.result(game.state, ai_move)
     print(game)
     if game.is_win(game.state, ai_agent.symbol):
-        print('I win!')
+        print('Player 2!')
         break
 
 print("Game Over")

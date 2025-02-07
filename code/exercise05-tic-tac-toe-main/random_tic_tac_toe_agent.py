@@ -11,7 +11,7 @@ class RandomTicTacToeAgent:
         self.symbol = symbol
 
     def action(self, state):
-        print("My turn!")
+        print("Random turn!")
         valid_moves = [i for i in range(len(state)) if state[i] == None]
         if bool(valid_moves):
             return random.choice(valid_moves)
