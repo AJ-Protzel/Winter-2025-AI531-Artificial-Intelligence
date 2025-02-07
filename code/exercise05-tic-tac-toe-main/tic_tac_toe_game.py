@@ -22,7 +22,15 @@ class TicTacToeGame:
         with respect to `player`. Assume `state` is a tuple representing the
         tic-tac-toe board state, and `player` is 'X' or 'O'.
         """
-        pass
+        opponent = 'O' if player == 'X' else 'X'
+    
+        if self.is_win(state, player):
+            return 1
+        elif self.is_win(state, opponent):
+            return -1
+        else:
+            return 0
+
 
     def is_not_over(self):
         """
