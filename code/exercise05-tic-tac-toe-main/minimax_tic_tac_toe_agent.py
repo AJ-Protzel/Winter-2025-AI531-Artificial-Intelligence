@@ -12,21 +12,27 @@ class MinimaxTicTacToeAgent:
 
     def action(self, state):
         print("Minimax turn!")
-        valid_moves = [i for i in range(len(state)) if state[i] is None]
-        if valid_moves:
-            if self.game is None:
-                return valid_moves[0]
-            move = self.minimax(self.game, state)
-            return move
-        else:
-            return None
+        # valid_moves = [i for i in range(len(state)) if state[i] is None]
+        # if valid_moves:
+        #     if self.game is None:
+        #         return valid_moves[0]
+        #     move = self.minimax(self.game, state)
+        #     return move
+        # else:
+        #     return None
+        # # invodce minimax and return moves
+        move = self.minimax(self.game, state)
+        return move
 
     def minimax(self, game, state):
-        player = game.to_move(state)
-        if player == self.symbol:
-            _, move = self.max_value(game, state)
-        else:
-            _, move = self.min_value(game, state)
+    #     player = game.to_move(state)
+    #     if player == self.symbol:
+    #         _, move = self.max_value(game, state)
+    #     else:
+    #         _, move = self.min_value(game, state)
+    #     return move
+    # # always start on max
+        _, move = self.max_value(game, state)
         return move
 
     def max_value(self, game, state):
