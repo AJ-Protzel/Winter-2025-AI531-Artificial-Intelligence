@@ -687,126 +687,126 @@ class TestWumpusWorld(unittest.TestCase):
         world = WumpusWorld(agent_location = (2, 1), agent_direction = 'South')
         self.assertEqual('Bump', world.percept((2, 1))[3])
 
-    # def test_percept_no_bump(self):
-    #     """
-    #     A location with a wall in which the agent is not facing the wall does
-    #     not emit a 'Bump' percept.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 1), agent_direction = 'East')
-    #     self.assertEqual(None, world.percept((2, 1))[3])
+    def test_percept_no_bump(self):
+        """
+        A location with a wall in which the agent is not facing the wall does
+        not emit a 'Bump' percept.
+        """
+        world = WumpusWorld(agent_location = (2, 1), agent_direction = 'East')
+        self.assertEqual(None, world.percept((2, 1))[3])
 
-    # def test_percept_scream(self):
-    #     """
-    #     If the wumpus is dead, the percept in every location matches (_, _, _, _, 'Scream')
-    #     """
-    #     world = WumpusWorld(wumpus_alive = False)
-    #     for x in range(1, 5):
-    #         for y in range(1, 5):
-    #             self.assertEqual('Scream', world.percept((x, y))[4])
+    def test_percept_scream(self):
+        """
+        If the wumpus is dead, the percept in every location matches (_, _, _, _, 'Scream')
+        """
+        world = WumpusWorld(wumpus_alive = False)
+        for x in range(1, 5):
+            for y in range(1, 5):
+                self.assertEqual('Scream', world.percept((x, y))[4])
 
-    # def test_percept_no_scream(self):
-    #     """
-    #     If the wumpus is alive, the percept in every location matches (_, _, _, _, None)
-    #     """
-    #     world = WumpusWorld(wumpus_alive = True)
-    #     for x in range(1, 5):
-    #         for y in range(1, 5):
-    #             self.assertEqual(None, world.percept((x, y))[4])
+    def test_percept_no_scream(self):
+        """
+        If the wumpus is alive, the percept in every location matches (_, _, _, _, None)
+        """
+        world = WumpusWorld(wumpus_alive = True)
+        for x in range(1, 5):
+            for y in range(1, 5):
+                self.assertEqual(None, world.percept((x, y))[4])
 
     """
     percept system tests with example wumpus world
     """
 
-    # def test_percept_1_1(self):
-    #     """
-    #     The percept of location (1, 1) is (None, None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, None, None, None, None), world.percept((1, 1)))
+    def test_percept_1_1(self):
+        """
+        The percept of location (1, 1) is (None, None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, None, None, None, None), world.percept((1, 1)))
 
-    # def test_percept_1_2(self):
-    #     """
-    #     The percept of location (1, 2) is ('Stench', None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual(('Stench', None, None, None, None), world.percept((1, 2)))
+    def test_percept_1_2(self):
+        """
+        The percept of location (1, 2) is ('Stench', None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual(('Stench', None, None, None, None), world.percept((1, 2)))
 
-    # def test_percept_1_3(self):
-    #     """
-    #     The percept of location (1, 3) is ('Stench', None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual(('Stench', None, None, None, None), world.percept((1, 3)))
+    def test_percept_1_3(self):
+        """
+        The percept of location (1, 3) is ('Stench', None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual(('Stench', None, None, None, None), world.percept((1, 3)))
 
-    # def test_percept_1_4(self):
-    #     """
-    #     The percept of location (1, 4) is ('Stench', None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual(('Stench', None, None, None, None), world.percept((1, 4)))
+    def test_percept_1_4(self):
+        """
+        The percept of location (1, 4) is ('Stench', None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual(('Stench', None, None, None, None), world.percept((1, 4)))
 
-    # def test_percept_2_1(self):
-    #     """
-    #     The percept of location (2, 1) is (None, 'Breeze', None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, 'Breeze', None, None, None), world.percept((2, 1)))
+    def test_percept_2_1(self):
+        """
+        The percept of location (2, 1) is (None, 'Breeze', None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, 'Breeze', None, None, None), world.percept((2, 1)))
 
-    # def test_percept_2_2(self):
-    #     """
-    #     The percept of location (2, 2) is (None, None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, None, None, None, None), world.percept((2, 2)))
+    def test_percept_2_2(self):
+        """
+        The percept of location (2, 2) is (None, None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, None, None, None, None), world.percept((2, 2)))
 
-    # def test_percept_2_3(self):
-    #     """
-    #     The percept of location 2, 3 is ('Stench', 'Breeze', 'Glitter', None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual(('Stench', 'Breeze', 'Glitter', None, None), world.percept((2, 3)))
+    def test_percept_2_3(self):
+        """
+        The percept of location 2, 3 is ('Stench', 'Breeze', 'Glitter', None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual(('Stench', 'Breeze', 'Glitter', None, None), world.percept((2, 3)))
 
-    # def test_percept_2_4(self):
-    #     """
-    #     The percept of location (2, 4) is (None, None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, None, None, None, None), world.percept((2, 4)))
+    def test_percept_2_4(self):
+        """
+        The percept of location (2, 4) is (None, None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, None, None, None, None), world.percept((2, 4)))
 
-    # def test_percept_3_2(self):
-    #     """
-    #     The percept of location (3, 2) is (None, 'Breeze', None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, 'Breeze', None, None, None), world.percept((3, 2)))
+    def test_percept_3_2(self):
+        """
+        The percept of location (3, 2) is (None, 'Breeze', None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, 'Breeze', None, None, None), world.percept((3, 2)))
 
-    # def test_percept_3_4(self):
-    #     """
-    #     The percept of location (3, 4) is (None, 'Breeze', None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, 'Breeze', None, None, None), world.percept((3, 4)))
+    def test_percept_3_4(self):
+        """
+        The percept of location (3, 4) is (None, 'Breeze', None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, 'Breeze', None, None, None), world.percept((3, 4)))
 
-    # def test_percept_4_1(self):
-    #     """
-    #     The percept of location (4, 1) is (None, 'Breeze', None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, 'Breeze', None, None, None), world.percept((4, 1)))
+    def test_percept_4_1(self):
+        """
+        The percept of location (4, 1) is (None, 'Breeze', None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, 'Breeze', None, None, None), world.percept((4, 1)))
 
-    # def test_percept_4_2(self):
-    #     """
-    #     The percept of location (4, 2) is (None, None, None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, None, None, None, None), world.percept((4, 2)))
+    def test_percept_4_2(self):
+        """
+        The percept of location (4, 2) is (None, None, None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, None, None, None, None), world.percept((4, 2)))
 
-    # def test_percept_4_3(self):
-    #     """
-    #     The percept of location (4, 3) is (None, 'Breeze', None, None, None)
-    #     """
-    #     world = example_wumpus_world()
-    #     self.assertEqual((None, 'Breeze', None, None, None), world.percept((4, 3)))
+    def test_percept_4_3(self):
+        """
+        The percept of location (4, 3) is (None, 'Breeze', None, None, None)
+        """
+        world = example_wumpus_world()
+        self.assertEqual((None, 'Breeze', None, None, None), world.percept((4, 3)))
 
     """
     Side Effects
@@ -816,259 +816,259 @@ class TestWumpusWorld(unittest.TestCase):
     turned_left
     """
 
-    # def test_turned_left(self):
-    #     """
-    #     Turning left results in a new agent direction.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East')
-    #     self.assertEqual('East', world.agent_direction)
-    #     world.turned_left()
-    #     self.assertEqual('North', world.agent_direction)
-    #     world.turned_left()
-    #     self.assertEqual('West', world.agent_direction)
-    #     world.turned_left()
-    #     self.assertEqual('South', world.agent_direction)
-    #     world.turned_left()
-    #     self.assertEqual('East', world.agent_direction)
+    def test_turned_left(self):
+        """
+        Turning left results in a new agent direction.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East')
+        self.assertEqual('East', world.agent_direction)
+        world.turned_left()
+        self.assertEqual('North', world.agent_direction)
+        world.turned_left()
+        self.assertEqual('West', world.agent_direction)
+        world.turned_left()
+        self.assertEqual('South', world.agent_direction)
+        world.turned_left()
+        self.assertEqual('East', world.agent_direction)
 
     """
     turned_right
     """
 
-    # def test_turned_right(self):
-    #     """
-    #     Turning right results in a new agent direction.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East')
-    #     self.assertEqual('East', world.agent_direction)
-    #     world.turned_right()
-    #     self.assertEqual('South', world.agent_direction)
-    #     world.turned_right()
-    #     self.assertEqual('West', world.agent_direction)
-    #     world.turned_right()
-    #     self.assertEqual('North', world.agent_direction)
-    #     world.turned_right()
-    #     self.assertEqual('East', world.agent_direction)
+    def test_turned_right(self):
+        """
+        Turning right results in a new agent direction.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East')
+        self.assertEqual('East', world.agent_direction)
+        world.turned_right()
+        self.assertEqual('South', world.agent_direction)
+        world.turned_right()
+        self.assertEqual('West', world.agent_direction)
+        world.turned_right()
+        self.assertEqual('North', world.agent_direction)
+        world.turned_right()
+        self.assertEqual('East', world.agent_direction)
 
     """
     moved_forward
     """
 
-    # def test_moved_forward_east(self):
-    #     """
-    #     Facing east, moving forward changes the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 2), agent_direction = 'East')
-    #     world.moved_forward()
-    #     self.assertEqual((3, 2), world.agent_location)
+    def test_moved_forward_east(self):
+        """
+        Facing east, moving forward changes the agent location.
+        """
+        world = WumpusWorld(agent_location = (2, 2), agent_direction = 'East')
+        world.moved_forward()
+        self.assertEqual((3, 2), world.agent_location)
 
-    # def test_moved_forward_east_bump(self):
-    #     """
-    #     Facing east, moving into a wall does not change the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (4, 2), agent_direction = 'East')
-    #     world.moved_forward()
-    #     self.assertEqual((4, 2), world.agent_location)
+    def test_moved_forward_east_bump(self):
+        """
+        Facing east, moving into a wall does not change the agent location.
+        """
+        world = WumpusWorld(agent_location = (4, 2), agent_direction = 'East')
+        world.moved_forward()
+        self.assertEqual((4, 2), world.agent_location)
 
-    # def test_moved_forward_west(self):
-    #     """
-    #     Facing west, moving forward changes the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 2), agent_direction = 'West')
-    #     world.moved_forward()
-    #     self.assertEqual((1, 2), world.agent_location)
+    def test_moved_forward_west(self):
+        """
+        Facing west, moving forward changes the agent location.
+        """
+        world = WumpusWorld(agent_location = (2, 2), agent_direction = 'West')
+        world.moved_forward()
+        self.assertEqual((1, 2), world.agent_location)
 
-    # def test_moved_forward_west_bump(self):
-    #     """
-    #     Facing west, moving into a wall does not change the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 2), agent_direction = 'West')
-    #     world.moved_forward()
-    #     self.assertEqual((1, 2), world.agent_location)
+    def test_moved_forward_west_bump(self):
+        """
+        Facing west, moving into a wall does not change the agent location.
+        """
+        world = WumpusWorld(agent_location = (1, 2), agent_direction = 'West')
+        world.moved_forward()
+        self.assertEqual((1, 2), world.agent_location)
 
-    # def test_moved_forward_north(self):
-    #     """
-    #     Facing north, moving forward changes the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 2), agent_direction = 'North')
-    #     world.moved_forward()
-    #     self.assertEqual((2, 3), world.agent_location)
+    def test_moved_forward_north(self):
+        """
+        Facing north, moving forward changes the agent location.
+        """
+        world = WumpusWorld(agent_location = (2, 2), agent_direction = 'North')
+        world.moved_forward()
+        self.assertEqual((2, 3), world.agent_location)
 
-    # def test_moved_forward_north_bump(self):
-    #     """
-    #     Facing north, moving into a wall does not change the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 4), agent_direction = 'North')
-    #     world.moved_forward()
-    #     self.assertEqual((2, 4), world.agent_location)
+    def test_moved_forward_north_bump(self):
+        """
+        Facing north, moving into a wall does not change the agent location.
+        """
+        world = WumpusWorld(agent_location = (2, 4), agent_direction = 'North')
+        world.moved_forward()
+        self.assertEqual((2, 4), world.agent_location)
 
-    # def test_moved_forward_south(self):
-    #     """
-    #     Facing south, moving forward changes the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 2), agent_direction = 'South')
-    #     world.moved_forward()
-    #     self.assertEqual((2, 1), world.agent_location)
+    def test_moved_forward_south(self):
+        """
+        Facing south, moving forward changes the agent location.
+        """
+        world = WumpusWorld(agent_location = (2, 2), agent_direction = 'South')
+        world.moved_forward()
+        self.assertEqual((2, 1), world.agent_location)
 
-    # def test_moved_forward_south_bump(self):
-    #     """
-    #     Facing south, moving into a wall does not change the agent location.
-    #     """
-    #     world = WumpusWorld(agent_location = (2, 1), agent_direction = 'South')
-    #     world.moved_forward()
-    #     self.assertEqual((2, 1), world.agent_location)
+    def test_moved_forward_south_bump(self):
+        """
+        Facing south, moving into a wall does not change the agent location.
+        """
+        world = WumpusWorld(agent_location = (2, 1), agent_direction = 'South')
+        world.moved_forward()
+        self.assertEqual((2, 1), world.agent_location)
 
-    # def test_moved_forward_into_pit(self):
-    #     """
-    #     Moving forward into a pit results in the 'miserable death' of the agent.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
-    #         pit_locations = [(2, 1)])
-    #     world.moved_forward()
-    #     self.assertEqual((2, 1), world.agent_location)
-    #     self.assertFalse(world.agent_alive)
+    def test_moved_forward_into_pit(self):
+        """
+        Moving forward into a pit results in the 'miserable death' of the agent.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
+            pit_locations = [(2, 1)])
+        world.moved_forward()
+        self.assertEqual((2, 1), world.agent_location)
+        self.assertFalse(world.agent_alive)
 
-    # def test_moved_forward_into_living_wumpus(self):
-    #     """
-    #     Moving forward into a living wumpus results in the 'miserable death' of the agent.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
-    #         wumpus_location = (2, 1), wumpus_alive = True)
-    #     world.moved_forward()
-    #     self.assertEqual((2, 1), world.agent_location)
-    #     self.assertFalse(world.agent_alive)
+    def test_moved_forward_into_living_wumpus(self):
+        """
+        Moving forward into a living wumpus results in the 'miserable death' of the agent.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
+            wumpus_location = (2, 1), wumpus_alive = True)
+        world.moved_forward()
+        self.assertEqual((2, 1), world.agent_location)
+        self.assertFalse(world.agent_alive)
 
-    # def test_moved_forward_into_dead_wumpus(self):
-    #     """
-    #     Moving forward into a dead wumpus is just a smelly experience.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
-    #         wumpus_location = (2, 1), wumpus_alive = False)
-    #     world.moved_forward()
-    #     self.assertEqual((2, 1), world.agent_location)
-    #     self.assertTrue(world.agent_alive)
+    def test_moved_forward_into_dead_wumpus(self):
+        """
+        Moving forward into a dead wumpus is just a smelly experience.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
+            wumpus_location = (2, 1), wumpus_alive = False)
+        world.moved_forward()
+        self.assertEqual((2, 1), world.agent_location)
+        self.assertTrue(world.agent_alive)
 
     """
     grabbed
     """
 
-    # def test_grabbed_without_gold(self):
-    #     """
-    #     Grabbing in a location without gold does nothing.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), gold_location = (2, 2))
-    #     self.assertNotEqual(world.agent_location, world.gold_location)
-    #     world.grabbed()
-    #     self.assertEqual((2, 2), world.gold_location)
-    #     self.assertEqual('Glitter', world.percept(world.gold_location)[2])
+    def test_grabbed_without_gold(self):
+        """
+        Grabbing in a location without gold does nothing.
+        """
+        world = WumpusWorld(agent_location = (1, 1), gold_location = (2, 2))
+        self.assertNotEqual(world.agent_location, world.gold_location)
+        world.grabbed()
+        self.assertEqual((2, 2), world.gold_location)
+        self.assertEqual('Glitter', world.percept(world.gold_location)[2])
 
-    # def test_grabbed_gold(self):
-    #     """
-    #     Grabbing in a location with gold removes the gold from the world, thereby
-    #     setting `gold_location` to None.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), gold_location = (1, 1))
-    #     self.assertEqual(world.agent_location, world.gold_location)
-    #     world.grabbed()
-    #     self.assertIsNone(world.gold_location)
+    def test_grabbed_gold(self):
+        """
+        Grabbing in a location with gold removes the gold from the world, thereby
+        setting `gold_location` to None.
+        """
+        world = WumpusWorld(agent_location = (1, 1), gold_location = (1, 1))
+        self.assertEqual(world.agent_location, world.gold_location)
+        world.grabbed()
+        self.assertIsNone(world.gold_location)
 
-    # def test_grabbed_gold_removes_glitter(self):
-    #     """
-    #     Grabbing the gold results in the absence of the 'Glitter' percept.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), gold_location = (1, 1))
-    #     self.assertEqual(world.agent_location, world.gold_location)
-    #     self.assertIn('Glitter', world.percept(world.agent_location))
-    #     world.grabbed()
-    #     self.assertNotIn('Glitter', world.percept(world.agent_location))
+    def test_grabbed_gold_removes_glitter(self):
+        """
+        Grabbing the gold results in the absence of the 'Glitter' percept.
+        """
+        world = WumpusWorld(agent_location = (1, 1), gold_location = (1, 1))
+        self.assertEqual(world.agent_location, world.gold_location)
+        self.assertIn('Glitter', world.percept(world.agent_location))
+        world.grabbed()
+        self.assertNotIn('Glitter', world.percept(world.agent_location))
 
     """
     climbed
     """
 
-    # def test_climbed_without_exit(self):
-    #     """
-    #     Climbing in any location other than (1, 1) does nothing.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 2))
-    #     self.assertNotEqual((1, 1), world.agent_location)
-    #     world.climbed()
-    #     self.assertEqual((1, 2), world.agent_location)
+    def test_climbed_without_exit(self):
+        """
+        Climbing in any location other than (1, 1) does nothing.
+        """
+        world = WumpusWorld(agent_location = (1, 2))
+        self.assertNotEqual((1, 1), world.agent_location)
+        world.climbed()
+        self.assertEqual((1, 2), world.agent_location)
 
-    # def test_climbed_with_exit(self):
-    #     """
-    #     Climbing in location (1, 1) exits the cave, removing the agent from the
-    #     world, thereby setting `agent_location` to None.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1))
-    #     self.assertEqual((1, 1), world.agent_location)
-    #     world.climbed()
-    #     self.assertIsNone(world.agent_location)
+    def test_climbed_with_exit(self):
+        """
+        Climbing in location (1, 1) exits the cave, removing the agent from the
+        world, thereby setting `agent_location` to None.
+        """
+        world = WumpusWorld(agent_location = (1, 1))
+        self.assertEqual((1, 1), world.agent_location)
+        world.climbed()
+        self.assertIsNone(world.agent_location)
 
     """
     shot
     """
 
-    # def test_shot_missed(self):
-    #     """
-    #     Shooting when the wumpus is outside the arrow trajectory does nothing.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'North',
-    #         wumpus_location = (3, 1), wumpus_alive = True)
-    #     world.shot()
-    #     self.assertEqual((3, 1), world.wumpus_location)
-    #     self.assertTrue(world.wumpus_alive)
-    #     self.assertIsNone(world.percept(world.agent_location)[4]) # No scream
+    def test_shot_missed(self):
+        """
+        Shooting when the wumpus is outside the arrow trajectory does nothing.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'North',
+            wumpus_location = (3, 1), wumpus_alive = True)
+        world.shot()
+        self.assertEqual((3, 1), world.wumpus_location)
+        self.assertTrue(world.wumpus_alive)
+        self.assertIsNone(world.percept(world.agent_location)[4]) # No scream
 
-    # def test_shot_east(self):
-    #     """
-    #     Shooting east when the wumpus is east of the agent kills the wumpus.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
-    #         wumpus_location = (4, 1), wumpus_alive = True)
-    #     world.shot()
-    #     self.assertFalse(world.wumpus_alive)
-    #     self.assertEqual('Scream', world.percept((1, 1))[4])
+    def test_shot_east(self):
+        """
+        Shooting east when the wumpus is east of the agent kills the wumpus.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'East',
+            wumpus_location = (4, 1), wumpus_alive = True)
+        world.shot()
+        self.assertFalse(world.wumpus_alive)
+        self.assertEqual('Scream', world.percept((1, 1))[4])
 
-    # def test_shot_west(self):
-    #     """
-    #     Shooting west when the wumpus is west of the agent kills the wumpus.
-    #     """
-    #     world = WumpusWorld(agent_location = (4, 1), agent_direction = 'West',
-    #         wumpus_location = (1, 1), wumpus_alive = True)
-    #     world.shot()
-    #     self.assertFalse(world.wumpus_alive)
-    #     self.assertEqual('Scream', world.percept((4, 1))[4])
+    def test_shot_west(self):
+        """
+        Shooting west when the wumpus is west of the agent kills the wumpus.
+        """
+        world = WumpusWorld(agent_location = (4, 1), agent_direction = 'West',
+            wumpus_location = (1, 1), wumpus_alive = True)
+        world.shot()
+        self.assertFalse(world.wumpus_alive)
+        self.assertEqual('Scream', world.percept((4, 1))[4])
 
-    # def test_shot_north(self):
-    #     """
-    #     Shooting north when the wumpus is north of the agent kills the wumpus.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 1), agent_direction = 'North',
-    #         wumpus_location = (1, 4), wumpus_alive = True)
-    #     world.shot()
-    #     self.assertFalse(world.wumpus_alive)
-    #     self.assertEqual('Scream', world.percept((1, 1))[4])
+    def test_shot_north(self):
+        """
+        Shooting north when the wumpus is north of the agent kills the wumpus.
+        """
+        world = WumpusWorld(agent_location = (1, 1), agent_direction = 'North',
+            wumpus_location = (1, 4), wumpus_alive = True)
+        world.shot()
+        self.assertFalse(world.wumpus_alive)
+        self.assertEqual('Scream', world.percept((1, 1))[4])
 
-    # def test_shot_south(self):
-    #     """
-    #     Shooting south when the wumpus is south of the agent kills the wumpus.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 4), agent_direction = 'South',
-    #         wumpus_location = (1, 1), wumpus_alive = True)
-    #     world.shot()
-    #     self.assertFalse(world.wumpus_alive)
-    #     self.assertEqual('Scream', world.percept((1, 4))[4])
+    def test_shot_south(self):
+        """
+        Shooting south when the wumpus is south of the agent kills the wumpus.
+        """
+        world = WumpusWorld(agent_location = (1, 4), agent_direction = 'South',
+            wumpus_location = (1, 1), wumpus_alive = True)
+        world.shot()
+        self.assertFalse(world.wumpus_alive)
+        self.assertEqual('Scream', world.percept((1, 4))[4])
 
-    # def test_shot_wumpus_dead_but_present(self):
-    #     """
-    #     Shooting the wumpus kills it, but does not remove it from the cave.
-    #     """
-    #     world = WumpusWorld(agent_location = (1, 4), agent_direction = 'South',
-    #         wumpus_location = (1, 1), wumpus_alive = True)
-    #     world.shot()
-    #     self.assertFalse(world.wumpus_alive)
-    #     self.assertEqual((1, 1), world.wumpus_location)
+    def test_shot_wumpus_dead_but_present(self):
+        """
+        Shooting the wumpus kills it, but does not remove it from the cave.
+        """
+        world = WumpusWorld(agent_location = (1, 4), agent_direction = 'South',
+            wumpus_location = (1, 1), wumpus_alive = True)
+        world.shot()
+        self.assertFalse(world.wumpus_alive)
+        self.assertEqual((1, 1), world.wumpus_location)
 
 
 def example_wumpus_world():

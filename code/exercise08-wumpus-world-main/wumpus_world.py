@@ -32,26 +32,28 @@ class WumpusWorld:
         form of ('Stench', 'Breeze', 'Glitter', 'Bump', 'Scream'). Any of the elements
         within the returned percept tuple can be None.
         """
-        if location is None:
-            return (None, None, None, None, None)
+        if(location is None): return (None, None, None, None, None)
 
-        if location == self.gold_location:
-            return (None, None, 'Glitter', None, None)
+        percept = [None, None, None, None, None]
 
-        if self.wumpus_location is not None:
-            if location == self.wumpus_location or self.adjacent(location, self.wumpus_location):
-                return ('Stench', None, None, None, None)
-        
+        if(self.wumpus_location is not None):
+            if(location == self.wumpus_location or self.adjacent(location, self.wumpus_location)):
+                percept[0] = 'Stench'
+
         for pit_location in self.pit_locations:
-            if self.adjacent(location, pit_location):
-                return (None, 'Breeze', None, None, None)
-        
-        if(self.agent_bumped_wall):
-            return 'Bump'
+            if(self.adjacent(location, pit_location)):
+                percept[1] = 'Breeze'
 
-        return (None, None, None, None, None)  # default catch on fail
-        # fail: gold = none, wumpus lcoatin = none, pit adjacent = none
-        
+        if(location == self.gold_location):
+            percept[2] = 'Glitter'
+
+        if(self.agent_bumped_wall()):
+            percept[3] = 'Bump'
+
+        if(self.wumpus_alive == False):
+            percept[4] = 'Scream'
+
+        return tuple(percept)
 
     """
     Physical side effects of agent actions
@@ -62,13 +64,19 @@ class WumpusWorld:
         Turn the agent counter-clockwise, to the left, resulting in a new
         `agent_direction`.
         """
-        pass
+        directions = ['North', 'West', 'South', 'East']
+        curr_dir = directions.index(self.agent_direction)
+        new_dir = (curr_dir + 1) % len(directions)
+        self.agent_direction = directions[new_dir]
 
     def turned_right(self):
         """
         Turn the agent clockwise, to the right, resulting in a new `agent_direction`.
         """
-        pass
+        directions = ['North', 'West', 'South', 'East']
+        curr_dir = directions.index(self.agent_direction)
+        new_dir = (curr_dir - 1) % len(directions)
+        self.agent_direction = directions[new_dir]
 
     def moved_forward(self):
         """
@@ -76,28 +84,48 @@ class WumpusWorld:
         Moving into a pit location kills the agent.
         Moving into a living wumpus location kills the agent.
         """
-        pass
+        if(not self.agent_bumped_wall()):
+            x, y = self.agent_location
+            if(self.agent_direction == 'North'):
+                self.agent_location = (x, y+1)
+            if(self.agent_direction == 'South'):
+                self.agent_location = (x, y-1)
+            if(self.agent_direction == 'East'):
+                self.agent_location = (x+1, y)
+            if(self.agent_direction == 'West'):
+                self.agent_location = (x-1, y)
+
+        if((self.agent_location in self.pit_locations) or \
+            (self.agent_location == self.wumpus_location and self.wumpus_alive == True)):
+            self.agent_alive = False
 
     def grabbed(self):
         """
         Attempt to grab the gold. Successful when executed in `gold_location`, in
         which case the gold location should be set to None.
         """
-        pass
+        if(self.agent_location == self.gold_location and self.gold_location is not None):
+            self.gold_location = None
 
     def climbed(self):
         """
         Attempt to climb out of the cave. Successful when executed in location
         (1, 1), in which case the agent location should be set to None.
         """
-        pass
+        if(self.agent_location == (1,1)):
+            self.agent_location = None
 
     def shot(self):
         """
         Shoot the arrow. If the arrow strikes the wumpus, then the wumpus should
         no longer be alive.
         """
-        pass
+        if(self.wumpus_alive == True and \
+            self.agent_direction == 'North' and self.wumpus_north_of_agent() or \
+            self.agent_direction == 'South' and self.wumpus_south_of_agent() or \
+            self.agent_direction == 'East' and self.wumpus_east_of_agent() or \
+            self.agent_direction == 'West' and self.wumpus_west_of_agent()):
+            self.wumpus_alive = False  
 
     """
     Helper methods
@@ -144,7 +172,7 @@ class WumpusWorld:
         """
         x1, y1 = self.agent_location
         x2, y2 = self.wumpus_location
-        return self.adjacent((x1, y1 + 1), (x2, y2))
+        return x1 == x2 and y2 > y1
 
     def wumpus_south_of_agent(self):
         """
@@ -152,7 +180,7 @@ class WumpusWorld:
         """
         x1, y1 = self.agent_location
         x2, y2 = self.wumpus_location
-        return self.adjacent((x1, y1 - 1), (x2, y2))
+        return x1 == x2 and y2 < y1
 
     def wumpus_east_of_agent(self):
         """
@@ -160,7 +188,7 @@ class WumpusWorld:
         """
         x1, y1 = self.agent_location
         x2, y2 = self.wumpus_location
-        return self.adjacent((x1 + 1, y1), (x2, y2))
+        return y1 == y2 and x2 > x1
 
     def wumpus_west_of_agent(self):
         """
@@ -168,21 +196,17 @@ class WumpusWorld:
         """
         x1, y1 = self.agent_location
         x2, y2 = self.wumpus_location
-        return self.adjacent((x1 - 1, y1), (x2, y2))
+        return y1 == y2 and x2 < x1
 
     def agent_bumped_wall(self):
         """
         Did the agent bump into a wall? (Or, is the agent facing a wall?)
         """
         x, y = self.agent_location
-        if(self.agent_direction == 'North'):
-            return y == 4 or not self.adjacent((x, y + 1), (x, y))
-        elif(self.agent_direction == 'South'):
-            return y == 1 or not self.adjacent((x, y - 1), (x, y))
-        elif(self.agent_direction == 'East'):
-            return x == 4 or not self.adjacent((x + 1, y), (x, y))
-        elif(self.agent_direction == 'West'):
-            return x == 1 or not self.adjacent((x - 1, y), (x, y))
-        else:
-            return False
+        return (
+            (y == 4 and self.agent_direction == 'North') or
+            (y == 1 and self.agent_direction == 'South') or
+            (x == 4 and self.agent_direction == 'East') or
+            (x == 1 and self.agent_direction == 'West')
+        )
 
