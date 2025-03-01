@@ -202,6 +202,9 @@ class WumpusWorld:
         """
         Did the agent bump into a wall? (Or, is the agent facing a wall?)
         """
+        if(self.agent_location is None):
+            return False
+        
         x, y = self.agent_location
         return (
             (y == 4 and self.agent_direction == 'North') or
@@ -209,4 +212,3 @@ class WumpusWorld:
             (x == 4 and self.agent_direction == 'East') or
             (x == 1 and self.agent_direction == 'West')
         )
-
