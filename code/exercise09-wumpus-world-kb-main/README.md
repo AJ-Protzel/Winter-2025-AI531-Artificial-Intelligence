@@ -19,6 +19,17 @@ confront numerous implementation decisions. Your agent does not have to be
 the smartest or the most capable, but ensure that your implementation honors the
 specficiations of the KB-AGENT in the AIMA book.
 
+<!-- 
+function KB-AGENT(percept) returns an action
+  persistent: KB, a knowledge base
+              t, a counter, initially 0, indicating time
+  Tell(KB, Make-Percept-SENTENCE(percept, t)
+  action <- ASK(KB, Make-ACTlON-QUERY(t))
+  Tell(KB, Make-Action-SENTENCE(action, t)
+  t <— t + 1
+  return action 
+-->
+
 ## Instructions
 
 Your agent needs help! It has capabilities, but no brain.
