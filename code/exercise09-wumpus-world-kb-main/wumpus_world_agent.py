@@ -98,3 +98,7 @@ class WumpusWorldAgent:
     def shoot(self, world):
         print("Shooting")
         world.shot()
+    
+    def sit(self, world):
+        print("Sitting")
+        world.shot()

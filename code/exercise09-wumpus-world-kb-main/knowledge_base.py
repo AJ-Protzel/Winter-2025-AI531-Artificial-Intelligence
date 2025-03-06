@@ -31,7 +31,7 @@ class KnowledgeBase:
 
     def ask(self, query=None):
         if query is None:
-            return WumpusWorldAgent.climb
+            return WumpusWorldAgent.sit
         else:
             pass
 

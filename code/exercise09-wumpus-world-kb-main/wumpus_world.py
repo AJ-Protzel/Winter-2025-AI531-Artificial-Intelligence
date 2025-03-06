@@ -126,6 +126,12 @@ class WumpusWorld:
             self.agent_direction == 'East' and self.wumpus_east_of_agent() or \
             self.agent_direction == 'West' and self.wumpus_west_of_agent()):
             self.wumpus_alive = False  
+    
+    def sat(self):
+        """
+        The action was None so the agent did nothing
+        """
+        pass
 
     """
     Helper methods
