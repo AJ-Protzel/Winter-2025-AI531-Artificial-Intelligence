@@ -64,19 +64,25 @@ class WumpusWorld:
         Turn the agent counter-clockwise, to the left, resulting in a new
         `agent_direction`.
         """
-        directions = ['North', 'West', 'South', 'East']
-        curr_dir = directions.index(self.agent_direction)
-        new_dir = (curr_dir + 1) % len(directions)
-        self.agent_direction = directions[new_dir]
+        direction_map = {
+        'North': 'West',
+        'West': 'South',
+        'South': 'East',
+        'East': 'North'
+        }
+        self.agent_direction = direction_map[self.agent_direction]
 
     def turned_right(self):
         """
         Turn the agent clockwise, to the right, resulting in a new `agent_direction`.
         """
-        directions = ['North', 'West', 'South', 'East']
-        curr_dir = directions.index(self.agent_direction)
-        new_dir = (curr_dir - 1) % len(directions)
-        self.agent_direction = directions[new_dir]
+        direction_map = {
+        'North': 'East',
+        'East': 'South',
+        'South': 'West',
+        'West': 'North'
+        }
+        self.agent_direction = direction_map[self.agent_direction]
 
     def moved_forward(self):
         """
@@ -126,12 +132,6 @@ class WumpusWorld:
             self.agent_direction == 'East' and self.wumpus_east_of_agent() or \
             self.agent_direction == 'West' and self.wumpus_west_of_agent()):
             self.wumpus_alive = False  
-    
-    def sat(self):
-        """
-        The action was None so the agent did nothing
-        """
-        pass
 
     """
     Helper methods
