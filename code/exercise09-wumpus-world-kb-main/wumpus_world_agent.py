@@ -16,13 +16,17 @@ class WumpusWorldAgent:
         return action
 
     def make_percept_sentence(self, percept, t):
-        return (f"Turn {t} P: {percept}")
+        return percept
 
     def make_action_query(self, t):
-        return ("?")
+        return("?")
 
     def make_action_sentence(self, action, t):
-        return (f"Turn {t} A: {action}")
+        print(action)
+        # return((None, None))
+        return action
+
+
 
     def turn_left(self, world):
         print("Turning Left")

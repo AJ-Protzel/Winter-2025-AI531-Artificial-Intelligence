@@ -24,7 +24,7 @@ wumpus_world = WumpusWorld(
     pit_locations = [ (1, 2), (2, 1) ]
     )
 
-kb = KnowledgeBase()
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
 # Hint: tell the kb the initial given facts, such as the initial location
 # of the agent, and its initial direction.
 
@@ -49,7 +49,8 @@ wumpus_world = WumpusWorld(
     pit_locations = [ (1, 2), (2, 2), (3, 2), (4, 2) ]
     )
 
-kb = KnowledgeBase()
+# kb = KnowledgeBase()
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
 # Hint: tell the kb the initial given facts, such as the initial location
 # of the agent, and its initial direction.
 
