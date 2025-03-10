@@ -15,7 +15,7 @@ class WumpusWorld:
     EXIT_LOCATION = (1, 1)
 
     def __init__(self, agent_location = (1,1), agent_direction = 'East',
-                       agent_alive = True, wumpus_alive = None,
+                       agent_alive = True, wumpus_alive = True,
                        wumpus_location = None, gold_location = None,
                        pit_locations = []):
         self.agent_location = agent_location
@@ -49,6 +49,7 @@ class WumpusWorld:
 
         if(self.agent_bumped_wall()):
             percept[3] = 'Bump'
+            print("The hunter found a wall.")
 
         if(self.wumpus_alive == False):
             percept[4] = 'Scream'
@@ -71,6 +72,7 @@ class WumpusWorld:
         'East': 'North'
         }
         self.agent_direction = direction_map[self.agent_direction]
+        print(f"The hunter turned left.")
 
     def turned_right(self):
         """
@@ -83,6 +85,7 @@ class WumpusWorld:
         'West': 'North'
         }
         self.agent_direction = direction_map[self.agent_direction]
+        print(f"The hunter turned right.")
 
     def moved_forward(self):
         """
@@ -90,6 +93,7 @@ class WumpusWorld:
         Moving into a pit location kills the agent.
         Moving into a living wumpus location kills the agent.
         """
+        print("The hunter moved forward.")
         if(not self.agent_bumped_wall()):
             x, y = self.agent_location
             if(self.agent_direction == 'North'):
@@ -101,17 +105,28 @@ class WumpusWorld:
             if(self.agent_direction == 'West'):
                 self.agent_location = (x-1, y)
 
-        if((self.agent_location in self.pit_locations) or \
-            (self.agent_location == self.wumpus_location and self.wumpus_alive == True)):
-            self.agent_alive = False
+            if self.agent_location in self.pit_locations:
+                self.agent_alive = False
+                print("The hunter has fallen to his death.")
+                print("GAME OVER")
+
+            if self.agent_location == self.wumpus_location and self.wumpus_alive:
+                self.agent_alive = False
+                print("The hunter has been eaten by the Wumpus.")
+                print("GAME OVER")
+        else:
+            print("The hunter bumped into a wall.")
 
     def grabbed(self):
         """
         Attempt to grab the gold. Successful when executed in `gold_location`, in
         which case the gold location should be set to None.
         """
+        print("The hunter grabbed something.")
         if(self.agent_location == self.gold_location and self.gold_location is not None):
             self.gold_location = None
+            print("It was gold!")
+        
 
     def climbed(self):
         """
@@ -120,18 +135,29 @@ class WumpusWorld:
         """
         if(self.agent_location == (1,1)):
             self.agent_location = None
+            self.agent_alive = False
+            print("The hunter climbed out of the cave.")
+            print("GAME OVER")
 
     def shot(self):
         """
         Shoot the arrow. If the arrow strikes the wumpus, then the wumpus should
         no longer be alive.
         """
+        print("The hunter shot an arrow.")
         if(self.wumpus_alive == True and \
             self.agent_direction == 'North' and self.wumpus_north_of_agent() or \
             self.agent_direction == 'South' and self.wumpus_south_of_agent() or \
             self.agent_direction == 'East' and self.wumpus_east_of_agent() or \
             self.agent_direction == 'West' and self.wumpus_west_of_agent()):
-            self.wumpus_alive = False  
+            self.wumpus_alive = False 
+            print("And killed the Wumpus.")
+        
+    
+    def sat(self):
+        self.agent_alive = False
+        print("The hunter has fallen into a spiraling depression.")
+        print("GAME OVER")
 
     """
     Helper methods
@@ -208,11 +234,11 @@ class WumpusWorld:
         """
         Did the agent bump into a wall? (Or, is the agent facing a wall?)
         """
-        if(self.agent_location is None):
+        if self.agent_location is None:
             return False
-        
+
         x, y = self.agent_location
-        return (
+        return(
             (y == 4 and self.agent_direction == 'North') or
             (y == 1 and self.agent_direction == 'South') or
             (x == 4 and self.agent_direction == 'East') or

@@ -1,78 +1,154 @@
 # Main
 # A demonstration of the WumpusWorldAgent and KnowledgeBase.
 # Adrien Protzel
+# Wumpus World Scratchpad
+# Use this as a "scratchpad" to tinker with your code.
+# There are no rules here, and this code will not be evaluated. This file is a
+# place for you to experiment.
+# Wumpus World Scratchpad
+# Use this as a "scratchpad" to tinker with your code.
+# There are no rules here, and this code will not be evaluated. This file is a
+# place for you to experiment.
+
+
+from wumpus_world import WumpusWorld
+from wumpus_world_agent import WumpusWorldAgent
+from knowledge_base import KnowledgeBase
+
+
+x = 20
+
+
+print("\nGAME 1 - Surrounded by Pits\n")
+"""
+Scenario 1: An agent in the initial location, surrounded by pits, should
+climb out of the cave.
+. . . .
+W G . .
+P . . .
+A P . .
+"""
+wumpus_world = WumpusWorld(
+    agent_location = (1, 1),
+    agent_direction = 'East',
+    wumpus_location = (1,3),
+    gold_location = (2, 3),
+    pit_locations = [ (1, 2), (2, 1) ]
+    )
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
+agent = WumpusWorldAgent(kb)
+for _ in range(x):
+    if not wumpus_world.agent_alive:
+        break
+    action = agent.action(wumpus_world.percept(wumpus_world.agent_location))
+    action(agent, wumpus_world)
+
+
+
+print("\nGAME 2 - Hallway of Pits\n")
+"""
+Scenario 2: An agent in the initial location, with pits to every immediate
+location to the north, would *at least* move once to the east.
+. . . .
+W G . .
+P P P P
+A . . .
+"""
+wumpus_world = WumpusWorld(
+    agent_location = (1, 1),
+    agent_direction = 'East',
+    wumpus_location = (1, 3),
+    gold_location = (2, 3),
+    pit_locations = [ (1, 2), (2, 2), (3, 2), (4, 2) ]
+    )
+
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
+agent = WumpusWorldAgent(kb)
+for _ in range(x):
+    if not wumpus_world.agent_alive:
+        break
+    action = agent.action(wumpus_world.percept(wumpus_world.agent_location))
+    action(agent, wumpus_world)
+
+
+
+print("\nGAME 3 - Gold at end of hallway\n")
+"""
+Scenario 3: An agent in the initial location, with pits to every immediate
+location to the north, would move to the east and collect the gold and make it safely back.
+. . . .
+W . . .
+P P P P
+A . . G
+"""
+wumpus_world = WumpusWorld(
+    agent_location = (1, 1),
+    agent_direction = 'East',
+    wumpus_location = (1, 3),
+    gold_location = (4, 1),
+    pit_locations = [ (1, 2), (2, 2), (3, 2), (4, 2) ]
+    )
+
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
+agent = WumpusWorldAgent(kb)
+for _ in range(x):
+    if not wumpus_world.agent_alive:
+        break
+    action = agent.action(wumpus_world.percept(wumpus_world.agent_location))
+    action(agent, wumpus_world)
+
+
+
+print("\nGAME 4 - Make a turn though pits\n")
+"""
+Scenario 4: An agent in the initial location, with pits to every immediate
+location to the north, would move to the east and make a turn to the north 
+and collect the gold and make it safely back.
+. . . .
+W . G .
+P P . P
+A . . .
+"""
+wumpus_world = WumpusWorld(
+    agent_location = (1, 1),
+    agent_direction = 'East',
+    wumpus_location = (1, 3),
+    gold_location = (3, 3),
+    pit_locations = [ (1, 2), (2, 2), (4, 2) ]
+    )
+
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
+agent = WumpusWorldAgent(kb)
+for _ in range(x):
+    if not wumpus_world.agent_alive:
+        break
+    action = agent.action(wumpus_world.percept(wumpus_world.agent_location))
+    action(agent, wumpus_world)
 
 
 
 
+print("\nGAME 5 - Kill the Wumpus\n")
+"""
+Scenario 5: An agent in the initial location, wumpus to the north
+in which it will do battle and win.
+. . . .
+W . G .
+. P . P
+A . . .
+"""
+wumpus_world = WumpusWorld(
+    agent_location = (1, 1),
+    agent_direction = 'North',
+    wumpus_location = (1, 3),
+    gold_location = (3, 3),
+    pit_locations = [ (2, 2), (4, 2) ]
+    )
 
-
-
-
-
-
-
-
-
-
-
-
-
-# from wumpus_world import WumpusWorld
-# from wumpus_world_agent import WumpusWorldAgent
-# from knowledge_base import KnowledgeBase
-# import random
-
-# # randomize the map
-# coordinates = [
-#     (1, 1),  # Agent
-#     (1, 3),  # Wumpus
-#     (2, 3),  # Gold
-#     (3, 1),  # Pit 1
-#     (3, 3),  # Pit 2
-#     (4, 3)   # Pit 3
-# ]
-
-# random_coordinates = set()
-# while len(random_coordinates) < 6:
-#     x = random.randint(1, 4)
-#     y = random.randint(1, 4)
-#     random_coordinates.add((x, y))
-# random_coordinates = list(random_coordinates)
-
-# coordinates = random_coordinates
-
-# wumpus_world = WumpusWorld(
-#     agent_location = coordinates[0],
-#     agent_direction = random.choice(["North", "South", "East", "West"]),
-#     agent_alive = True,
-#     wumpus_alive = True,
-#     wumpus_location = coordinates[1],
-#     gold_location = coordinates[2],
-#     pit_locations = coordinates[3:6]
-#     )
-
-# kb = KnowledgeBase()
-# agent = WumpusWorldAgent(kb)
-
-
-# print("NOTE: Percept 'Bump' will either all be True or False because the agent doesn't move")
-# print('-------')
-
-# # print the current map cells
-# map = [["." for _ in range(4)] for _ in range(4)]
-# map[4 - wumpus_world.wumpus_location[1]][wumpus_world.wumpus_location[0] - 1] = "W"
-# map[4 - wumpus_world.gold_location[1]][wumpus_world.gold_location[0] - 1] = "G"
-# for pit in wumpus_world.pit_locations:
-#     map[4 - pit[1]][pit[0] - 1] = "P"
-# map[4 - wumpus_world.agent_location[1]][wumpus_world.agent_location[0] - 1] = "A"
-# for row in map:
-#     print(" ".join(row))
-
-# print('-------')
-
-# # print the percepts at each cell
-# for x in range(1, 5):
-#     for y in range(1, 5):
-#         percept = wumpus_world.percept((x, y))
-#         print(f'({x},{y}) {percept}')
+kb = KnowledgeBase(wumpus_world.agent_location, wumpus_world.agent_direction)
+agent = WumpusWorldAgent(kb)
+for _ in range(x):
+    if not wumpus_world.agent_alive:
+        break
+    action = agent.action(wumpus_world.percept(wumpus_world.agent_location))
+    action(agent, wumpus_world)
